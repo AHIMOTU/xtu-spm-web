@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Message, MessageBox } from 'element-ui'
+import { Message, MessageBox, Notification } from 'element-ui'
 import Utils from './utils'
 
 const bus = new Vue()
@@ -23,6 +23,18 @@ class UiUtils extends Utils {
         ...options
       }).then(() => resolve(true)).catch(() => resolve(false))
     })
+  }
+
+  alert (content, title = '确认操作', options) {
+    return new Promise((resolve) => {
+      MessageBox.alert(content, title, {
+        ...options
+      }).then(() => resolve(true)).catch(() => resolve(false))
+    })
+  }
+
+  notice (message, title = '成功', duration = 3000, type = 'success', offset = 80, options) {
+    Notification({ title, message, duration, type, offset, ...options })
   }
 }
 

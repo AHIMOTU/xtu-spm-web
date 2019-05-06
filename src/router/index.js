@@ -6,10 +6,16 @@ import Detail from '@/pages/common/Detail.vue'
 import Cart from '@/pages/Cart.vue'
 import Order from '@/pages/Order.vue'
 import Login from '@/pages/common/Login.vue'
+import Registe from '@/pages/common/Registe.vue'
+import ResetPassword from '@/pages/common/ResetPassword'
 import Payment from '@/pages/Payment.vue'
 import Search from '@/pages/Search.vue'
 import CateSearch from '@/pages/CateSearch.vue'
 import MyOrder from '@/pages/MyOrder.vue'
+import Setting from '@/pages/common/Setting.vue'
+import Address from '@/pages/setting/Address.vue'
+import Password from '@/pages/setting/Password.vue'
+import Comment from '@/pages/Comment.vue'
 
 Vue.use(Router)
 
@@ -59,6 +65,28 @@ export default new Router({
           path: 'myorder',
           name: 'myorder',
           component: MyOrder
+        },
+        {
+          path: 'comment',
+          name: 'comment',
+          component: Comment
+        },
+        {
+          path: 'setting',
+          name: 'setting',
+          component: Setting,
+          children: [
+            {
+              path: '/setting/address',
+              name: 'address',
+              component: Address
+            },
+            {
+              path: '/setting/security',
+              name: 'security',
+              component: Password
+            }
+          ]
         }
       ]
     },
@@ -66,6 +94,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/registe',
+      name: 'registe',
+      component: Registe
+    },
+    {
+      path: '/resetpassword',
+      name: 'resetpassword',
+      component: ResetPassword
     }
   ]
 })

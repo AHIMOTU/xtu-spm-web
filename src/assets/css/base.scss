@@ -35,7 +35,10 @@ ul, ol {
   .app-view {
     height: 100vh;
     .content-view {
-      padding: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 50px;
+      padding-right: 50px;
     }
   }
 }
@@ -170,4 +173,10 @@ ul, ol {
 
 .pr-color {
   color: $color-primary;
+}
+.info-color {
+  color: $color-info;
+}
+.danger-color {
+  color: $color-danger;
 }

@@ -18,10 +18,11 @@
         </el-input>
         <div class="car-user m-l-120" :class="{fixed: isFixed}" flex="cross:center">
           <el-dropdown @command="handleCommand">
-            <bs-icon name="nohead" size="30" class="m-lv-20"></bs-icon>
-            <el-dropdown-menu slot="dropdown">
+            <bs-icon v-if="$ls.get('token') && $ls.getJSON('info') && $ls.getJSON('info').id" name="head" size="30" class="m-lv-20"></bs-icon>
+            <bs-icon @click.native="$router.push('/login')" v-else name="nohead" size="30" class="m-lv-20"></bs-icon>
+            <el-dropdown-menu v-if="$ls.get('token') && $ls.getJSON('info') && $ls.getJSON('info').id" slot="dropdown">
               <el-dropdown-item command="myorder">订单中心</el-dropdown-item>
-              <el-dropdown-item command="account">账户设置</el-dropdown-item>
+              <el-dropdown-item command="setting">账户设置</el-dropdown-item>
               <el-dropdown-item command="loginout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -50,8 +51,19 @@ export default {
   },
   methods: {
     handleCommand (command) {
+      // 订单中心
       if (command === 'myorder') {
         this.$router.push('/myorder')
+      }
+      // 账户设置
+      if (command === 'setting') {
+        this.$router.push('/setting/address')
+      }
+      // 退出
+      if (command === 'loginout') {
+        this.$ls.remove('token')
+        this.$ls.remove('info')
+        this.$router.push('/login')
       }
     },
     onSearch () {
@@ -65,6 +77,7 @@ export default {
     // 为了解决刷新后vuex的值初始化导致购物车数量为空的问题
     // 每次刷新从后台拿到购物车信息，并存到vuex中
     async findCart () {
+      if (!(this.$ls.get('token') && this.$ls.getJSON('info') && this.$ls.getJSON('info').id)) return
       let params = { userId: this.$ls.getJSON('info').id }
       const { data } = await this.$store.dispatch('getFindCart', params)
       if (data.data) {

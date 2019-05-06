@@ -1,7 +1,7 @@
 <template>
-  <div id="bs-product" class="w-180 h-260 p-5 p-r o-h">
-    <div @click="onDetail(detail.id)" class="h-200 w-180 c-p" flex="cross:center main:center"><img width="100%" height="100%" :src="detail.picture_url" alt=""></div>
-    <p class="sub-detail f-12">{{detail.name}}</p>
+  <div id="bs-product" class="w-180 h-260 p-5 p-r o-h m-lv-5 m-v-5">
+    <div @click="onDetail(detail.id)" class="h-200 w-180 c-p" flex="cross:center main:center"><img width="80%" height="80%" :src="detail.picture_url" alt=""></div>
+    <p class="sub-detail f-12" style="color: #7d7d7d;">{{detail.name}}</p>
     <div class="price">￥{{detail.price}}</div>
     <div @click="addCart" class="add-car c-p p-a w-p-100 h-30 f-14" flex="cross:center main:center">
       <bs-icon name="shopcard" size="16" class="m-r-5"></bs-icon>
@@ -23,12 +23,13 @@ export default {
     async addCart () {
       let params = {
         product_id: this.detail.id,
-        userId: this.$ls.getJSON('info').id,
+        // userId: this.$ls.getJSON('info').id,
         count: 1
       }
       const { data } = await this.$store.dispatch('postDirectAddCart', params)
-      if (data.code === 200) {
+      if (data && data.code === 200) {
         this.$store.commit('directAddCart', { product_id: this.detail.id, count: 1 })
+        this.$utils.notice('添加购物车成功！')
       }
     },
     onDetail (id) {
@@ -42,6 +43,7 @@ export default {
 @import '../assets/css/vars.scss';
 #bs-product {
   transition: all .5s;
+  background: #fff;
   &:hover {
     box-shadow: 1px 1px 20px #999;
     .add-car {

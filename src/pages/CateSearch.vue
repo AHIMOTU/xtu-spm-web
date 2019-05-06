@@ -4,7 +4,7 @@
       <div slot="header" class="clearfix">
         <el-button-group>
           <el-button :type="allType" size="medium" @click="onAllSort">综合</el-button>
-          <el-button :type="saleType" size="medium">销量</el-button>
+          <el-button :type="saleType" size="medium" @click="onSalesCount">销量</el-button>
           <el-button :type="priceType" size="medium" @click="onPriceSort">价格 <i :class="{'el-icon-sort-up': priceSort === 1, 'el-icon-sort-down': priceSort === 0}"></i></el-button>
         </el-button-group>
       </div>
@@ -64,6 +64,13 @@ export default {
       this.priceType = ''
       this.getData()
     },
+    // 按销量排序
+    onSalesCount () {
+      this.allType = ''
+      this.saleType = 'primary'
+      this.priceType = ''
+      this.getData(null, 0)
+    },
     onPriceSort () {
       if (this.priceSort === null) {
         this.priceSort = 1
@@ -77,12 +84,13 @@ export default {
       this.priceType = 'primary'
       this.getData(this.priceSort)
     },
-    async getData (priceSort) {
+    async getData (priceSort, salesSort) {
       let params = {
         cate_id: this.cateId,
         pageNum: this.pageNum,
         pageSize: this.pageSize,
-        priceSort
+        priceSort,
+        salesSort
       }
       this.loading = true
       const { data } = await this.$store.dispatch('getProductByCateId', params)

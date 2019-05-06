@@ -27,15 +27,15 @@
     </div>
     <div class="discount a-c f-24 p-v-20"><h3>今日特惠</h3></div>
     <div class="list1">
-      <div class="w-p-14" v-for="(product, index) in discountProduct" :key="index">
-        <bs-product :detail="product"></bs-product>
-      </div>
+<!--      <div class="w-p-14">-->
+        <bs-product v-for="(product, index) in discountProduct" :key="index" :detail="product"></bs-product>
+<!--      </div>-->
     </div>
     <div class="discount a-c f-24 p-v-20"><h3>热卖商品</h3></div>
     <div class="list1">
-      <div class="w-p-14" v-for="(product, index) in discountProduct" :key="index">
-        <bs-product :detail="product"></bs-product>
-      </div>
+<!--      <div class="" v-for="(product, index) in discountProduct" :key="index">-->
+        <bs-product v-for="(product, index) in discountProduct" :key="index" :detail="product"></bs-product>
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -60,7 +60,7 @@ export default {
     async getDiscountProduct () {
       const { data } = await this.$store.dispatch('getProductList', { pageNum: 1, pageSize: 7 })
       if (data.data) {
-        this.discountProduct = data.data
+        this.discountProduct = data.data.records
       }
     },
     async getCategoryList () {

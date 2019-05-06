@@ -8,6 +8,16 @@ const request = (method, url, data, config) => {
 export default {
   // 登录
   login: (params = {}, config = {}) => request('post', '/users/login', params, config),
+  // 获取验证码
+  getSms: (params = {}, config = {}) => request('get', '/users/sms', params, config),
+  // 检验验证码
+  postCheckSms: (params = {}, config = {}) => request('post', '/users/checkSms', params, config),
+  // 注册
+  regist: (params = {}, config = {}) => request('post', '/users/regist', params, config),
+  // 获取phone
+  getPhone: (params = {}, config = {}) => request('get', '/users/phone', params, config),
+  // 重置密码
+  postEditPassword: (params = {}, config = {}) => request('post', '/users/editPassword', params, config),
   // 商品列表
   getProductList: (params = {}, config = {}) => request('get', '/product/list', params, config),
   // 根据品类id搜索商品
@@ -32,10 +42,20 @@ export default {
   postAddAddress: (params = {}, config = {}) => request('post', '/address/add', params, config),
   // 查询地址
   getFindAddress: (params = {}, config = {}) => request('get', '/address/find', params, config),
+  // 编辑地址
+  postEditAddress: (params = {}, config = {}) => request('post', '/address/edit', params, config),
+  // 删除地址
+  postDelAddress: (params = {}, config = {}) => request('post', '/address/del', params, config),
   // 新增订单
   postAddOrder: (params = {}, config = {}) => request('post', '/order/add', params, config),
+  // 改变订单状态
+  postChangeStatus: (params = {}, config = {}) => request('post', '/order/changeStatus', params, config),
   // 根据订单id获取订单详情
   getFindByOrderId: (params = {}, config = {}) => request('get', '/order/findByOrderId', params, config),
   // 获取所有订单
-  getFindAllOrder: (params = {}, config = {}) => request('get', '/order/findAllOrder', params, config)
+  getFindAllOrder: (params = {}, config = {}) => request('get', '/order/findAllOrder', params, config),
+  // 新增评论
+  postAddComment: (params = {}, config = {}) => request('post', '/comment/add', params, config),
+  // 根据商品id获取评价
+  getFindComment: (params = {}, config = {}) => request('get', '/comment/find', params, config)
 }

@@ -49,6 +49,21 @@ export default new Vuex.Store({
     login (context, params) {
       return api.login(params)
     },
+    getSms (context, params) {
+      return api.getSms(params)
+    },
+    postCheckSms (context, params) {
+      return api.postCheckSms(params)
+    },
+    regist (context, params) {
+      return api.regist(params)
+    },
+    getPhone (context, params) {
+      return api.getPhone(params)
+    },
+    postEditPassword (context, params) {
+      return api.postEditPassword(params)
+    },
     getProductList (context, params) {
       return api.getProductList(params)
     },
@@ -85,14 +100,29 @@ export default new Vuex.Store({
     getFindAddress (conntext, params) {
       return api.getFindAddress(params)
     },
+    postEditAddress (context, params) {
+      return api.postEditAddress(params)
+    },
+    postDelAddress (context, params) {
+      return api.postDelAddress(params)
+    },
     postAddOrder (context, params) {
       return api.postAddOrder(params)
+    },
+    postChangeStatus (context, params) {
+      return api.postChangeStatus(params)
     },
     getFindByOrderId (context, params) {
       return api.getFindByOrderId(params)
     },
     getFindAllOrder (context, params) {
       return api.getFindAllOrder(params)
+    },
+    postAddComment (context, params) {
+      return api.postAddComment(params)
+    },
+    getFindComment (context, params) {
+      return api.getFindComment(params)
     }
   }
 })

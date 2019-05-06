@@ -1,15 +1,22 @@
 <template>
   <div>
-    <el-table v-loading="loading" ref="table" :data="dataList" @select="onSelect" @select-all="onSelectAll">
+    <el-table v-loading="loading" ref="table" :data="dataList" @select="onSelect" @select-all="onSelectAll" header-row-class-name="header-row">
       <el-table-column type="selection"></el-table-column>
-      <el-table-column prop="name" label="商品" align="center"></el-table-column>
-      <el-table-column prop="price" label="单价" align="center"></el-table-column>
+      <el-table-column label="商品" align="center">
+        <template slot-scope="scope">
+          <div flex="cross:center main:center">
+            <img width="80" height="80" :src="scope.row.picture_url" alt="">
+            <span class="m-l-10">{{scope.row.name}}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column prop="price" label="单价(元)" align="center"></el-table-column>
       <el-table-column prop="count" label="数量" align="center">
         <template slot-scope="scope">
           <el-input-number :min="1" :value="scope.row.count" @input="(value) => scope.row.count = value" @change="(value) => onChange(value, scope.row)"></el-input-number>
         </template>
       </el-table-column>
-      <el-table-column label="小计" align="center">
+      <el-table-column label="小计(元)" align="center">
         <template slot-scope="scope">
           <span>{{scope.row.price * scope.row.count}}</span>
         </template>
@@ -47,7 +54,6 @@ export default {
   watch: {
     selectDataList: {
       handler (val) {
-        debugger
         if (val.length !== 0) {
           this.checkedAll = val.length === this.dataList.length // 同步自定义全选按钮
         } else {
@@ -76,7 +82,6 @@ export default {
     // 将商品从购物车中删除
     async onDelete (rows) {
       let productIds = rows.map(r => r.id)
-      debugger
       const re = await this.$utils.confirm('确定要将该商品从购物车中删除吗？')
       if (re) {
         let params = {
@@ -165,3 +170,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import "../assets/css/vars.scss";
+  .header-row th {
+    /*<!--color: $color-primary !important;-->*/
+  }
+</style>
