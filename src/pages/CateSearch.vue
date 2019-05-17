@@ -8,7 +8,7 @@
           <el-button :type="priceType" size="medium" @click="onPriceSort">价格 <i :class="{'el-icon-sort-up': priceSort === 1, 'el-icon-sort-down': priceSort === 0}"></i></el-button>
         </el-button-group>
       </div>
-      <div>
+      <div v-if="list.length">
         <div class="" flex="" v-loading="loading">
           <bs-product :detail="product"  v-for="(product, index) in list" :key="index"></bs-product>
         </div>
@@ -22,6 +22,10 @@
           @size-change="sizeChange"
           @current-change="currentChange">
         </el-pagination>
+      </div>
+      <div v-else class="f-14 a-c m-v-20">
+        <span class="pr-color m-r-5"><i class="el-icon-info f-16"></i></span>
+        该品类下暂时还没有商品，去看看其他商品吧
       </div>
     </el-card>
   </div>

@@ -42,6 +42,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/css/vars.scss';
 #bs-product {
+  float: left;
   transition: all .5s;
   background: #fff;
   &:hover {

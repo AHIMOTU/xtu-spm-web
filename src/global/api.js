@@ -20,6 +20,8 @@ export default {
   postEditPassword: (params = {}, config = {}) => request('post', '/users/editPassword', params, config),
   // 商品列表
   getProductList: (params = {}, config = {}) => request('get', '/product/list', params, config),
+  // 热卖商品
+  getProductListBySales: (params = {}, config = {}) => request('get', '/product/listBySales', params, config),
   // 根据品类id搜索商品
   getProductByCateId: (params = {}, config = {}) => request('get', '/product/listByCateId', params, config),
   // 商品详情

@@ -67,6 +67,9 @@ export default new Vuex.Store({
     getProductList (context, params) {
       return api.getProductList(params)
     },
+    getProductListBySales (context, params) {
+      return api.getProductListBySales(params)
+    },
     getProductByCateId (context, params) {
       return api.getProductByCateId(params)
     },

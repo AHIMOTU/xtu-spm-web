@@ -2,7 +2,7 @@
   <div>
     <div class="welcome" flex="cross:center main:justify">
       <div class="m-l-150" flex="cross:center main:justify">
-        <img class="c-p" @click="$router.push('/')" src="../../assets/images/logo.png" alt="" width="130" height="48">
+        <img class="c-p" @click="$router.push('/')" src="../../assets/images/logo.jpg" alt="" width="130" height="48">
         <span class="f-24 m-l-20" style="color: #333;">找回密码</span>
       </div>
     </div>

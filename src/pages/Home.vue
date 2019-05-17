@@ -3,15 +3,25 @@
     <div flex="box:first">
       <div class="menu p-r b-o">
         <div class="title p-10 a-c">湘大超市频道分类</div>
+<!--        第一季菜单-->
         <div class="menu-item w-200" @click="onClickCate(item.id)" v-for="(item, index) in category" :key="index">
           <div class="menu-item-head" flex="main:justify cross:center">
             <span>{{item.name}}</span>
             <i class="el-icon-arrow-right"></i>
           </div>
           <div class="menu-item-body p-a">
-            <div class="w-300 p-20 f-14">
+            <div class="w-700 p-10 f-14">
+<!--              第二级菜单-->
               <template v-if="item.children">
-                <span class="childCategory m-5 c-p" @click="onClickCate(children.id)" v-for="(children, index) in item.children" :key="index">{{children.name}}</span>
+                <div class="w-222 h-88 b-r o-h f-l m-r-5 p-t-16 p-b-15 p-b-25 m-r-2" v-for="(child, index) in item.children" :key="index">
+                  <h4>{{child.name}}</h4>
+<!--                  第三级菜单-->
+                  <template v-if="child.children">
+                    <p class="f-12 m-t-10" style="color: #666;">
+                      <span @click.stop="onClickCate(grandson.id)" class="childCategory b-l p-l-9 c-p" v-for="(grandson, index) in child.children" :key="index">{{grandson.name}}</span>
+                    </p>
+                  </template>
+                </div>
               </template>
             </div>
           </div>
@@ -34,7 +44,7 @@
     <div class="discount a-c f-24 p-v-20"><h3>热卖商品</h3></div>
     <div class="list1">
 <!--      <div class="" v-for="(product, index) in discountProduct" :key="index">-->
-        <bs-product v-for="(product, index) in discountProduct" :key="index" :detail="product"></bs-product>
+        <bs-product v-for="(product, index) in salesProduct" :key="index" :detail="product"></bs-product>
 <!--      </div>-->
     </div>
   </div>
@@ -50,6 +60,7 @@ export default {
         { url: require('../assets/images/carousel3.jpg') }
       ],
       discountProduct: [], // 今日特惠
+      salesProduct: [], // 热卖商品
       category: [] // 品类
     }
   },
@@ -58,9 +69,15 @@ export default {
       this.$router.push({ path: '/catesearch', query: { id } })
     },
     async getDiscountProduct () {
-      const { data } = await this.$store.dispatch('getProductList', { pageNum: 1, pageSize: 7 })
+      const { data } = await this.$store.dispatch('getProductList', { pageNum: 1, pageSize: 6 })
       if (data.data) {
         this.discountProduct = data.data.records
+      }
+    },
+    async getProductListBySales () {
+      const { data } = await this.$store.dispatch('getProductListBySales', { pageNum: 1, pageSize: 6 })
+      if (data.data) {
+        this.salesProduct = data.data.records
       }
     },
     async getCategoryList () {
@@ -73,6 +90,7 @@ export default {
   created () {
     this.getCategoryList()
     this.getDiscountProduct()
+    this.getProductListBySales()
   }
 }
 </script>
@@ -104,7 +122,10 @@ export default {
       .menu-item-body {
         display: block;
         .childCategory {
+          margin-left: -10px;
+          margin-right: 18px;
           &:hover {
+            display: inline-block;
             color: $color-primary;
           }
         }
@@ -120,7 +141,7 @@ export default {
       height: 400px;
       border: 3px solid $color-primary;
       background: #fff;
-      opacity: 0.8;
+      opacity: 0.9;
       z-index: 999;
       display: none;
       top: 0;

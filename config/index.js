@@ -13,6 +13,7 @@ module.exports = {
     proxyTable: {
       '/': {
         target: 'http://localhost:3000'
+        // target: 'http://111.231.105.157:3000'
       }
     },
 

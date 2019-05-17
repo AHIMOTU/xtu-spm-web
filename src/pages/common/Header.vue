@@ -11,8 +11,8 @@
       </div>
     </div> -->
     <div class="nav w-p-100 h-80" :class="{fixed: isFixed}" flex="cross:center main:justify">
-      <div class="m-l-150"><img class="c-p" @click="$router.push('/')" src="../../assets/images/logo.png" alt="" width="130" height="48"></div>
-      <div class="m-r-150" flex="">
+      <div class="m-l-150"><img class="c-p" @click="$router.push('/')" src="../../assets/images/logo.jpg" alt="" width="130" height="48"></div>
+      <div class="m-r-150" flex="" @keyup.enter="onSearch">
         <el-input placeholder="请输入内容" v-model="keyword" class="input-with-select">
           <el-button slot="append" @click="onSearch">搜索</el-button>
         </el-input>

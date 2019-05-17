@@ -8,9 +8,9 @@
           <el-button :type="priceType" size="medium" @click="onPriceSort">价格 <i :class="{'el-icon-sort-up': priceSort === 1, 'el-icon-sort-down': priceSort === 0}"></i></el-button>
         </el-button-group>
       </div>
-      <div>
-        <div class="" flex="" v-loading="loading">
-          <bs-product :detail="product"  v-for="(product, index) in list" :key="index"></bs-product>
+      <div v-if="list.length">
+        <div class="o-h" v-loading="loading">
+          <bs-product class="f-l" :detail="product"  v-for="(product, index) in list" :key="index"></bs-product>
         </div>
         <el-pagination
           class="a-c m-v-20"
@@ -23,6 +23,10 @@
           @current-change="currentChange">
         </el-pagination>
       </div>
+      <div v-else class="f-14 a-c m-v-20">
+        <span class="pr-color m-r-5"><i class="el-icon-info f-16"></i></span>
+        暂未搜索到您想要的商品，去看看其他商品吧
+      </div>
     </el-card>
   </div>
 </template>
@@ -33,7 +37,7 @@ export default {
     return {
       list: [],
       total: 0,
-      pageSize: 10,
+      pageSize: 30,
       pageNum: 1,
       loading: false,
       priceSort: null,

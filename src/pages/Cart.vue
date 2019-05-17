@@ -147,9 +147,8 @@ export default {
       }
     },
     async getCart () {
-      let params = { userId: this.$ls.getJSON('info').id }
       this.loading = true
-      const { data } = await this.$store.dispatch('getFindCart', params)
+      const { data } = await this.$store.dispatch('getFindCart')
       this.loading = false
       if (data.data) {
         this.dataList = data.data
